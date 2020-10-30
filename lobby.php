@@ -6,6 +6,8 @@
 
     require_once("partial/header.php");
 ?>
+       <script src="src/chat.js"></script> 
+    </head>
     <body id="lobby">
 
         <div>
@@ -27,12 +29,10 @@
         </div>
 
         <div>
-            <iframe style="width:700px;height:240px;backgound" 
+            <iframe style="width:700px;height:240px;backgound" onload="applyStyles(this)"
                 src="https://magix.apps-de-cours.com/server/#/chat/<?=$_SESSION["gameKey"]?>">
             </iframe>
         </div>
-
-        <?= $data["message"] ?>
 
 <?php
     require_once("partial/footer.php");

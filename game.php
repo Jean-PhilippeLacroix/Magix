@@ -6,7 +6,8 @@
 
     require_once("partial/header.php");
 ?>
-
+        <script src="game.js"></script>
+    </head>
     <body id="gameField">
 
         <form action="" method="POST">

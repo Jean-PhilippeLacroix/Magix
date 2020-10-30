@@ -25,21 +25,26 @@
             elseif(isset($_POST["pratiquer"])){
                 $data["key"] = $_SESSION['gameKey'];
                 $data["type"] = "TRAINING";
-                //$result = CommonAction::callAPI("games/auto-match", $data);
-
+                $result = CommonAction::callAPI("games/auto-match", $data);
                 $message = $result;
-                header("location:game.php");
-                exit;
+
+                if($result == "JOINED_TRAINING"){
+                    header("location:game.php");
+                    exit;
+                }
+                
             }
 
             elseif(isset($_POST["jouer"])){
                 $data["key"] = $_SESSION['gameKey'];
                 $data["type"] = "PVP";
                 //$result = CommonAction::callAPI("games/auto-match", $data);
-
                 $message = $result;
-                header("location:game.php");
-                exit;
+
+                if($result == "JOINED_PVP" || $result == "CREATED_PVP"){
+                    header("location:game.php");
+                    exit;
+                }
             }
 
             return compact("message");

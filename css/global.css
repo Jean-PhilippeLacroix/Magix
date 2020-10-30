@@ -17,6 +17,9 @@ body{
     background-image: url("../images/game-bg.jpg");
 }
 
-iframe{
-    background-color: gray;
+
+div iframe{
+    position: absolute;
+    left: 33%;
+    top: 71%;
 }

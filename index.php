@@ -5,7 +5,8 @@
     $data = $action->execute();
 
     require_once("partial/header.php");
-?>
+?>  
+    </head>
     <body id="login">
         <form action="" method="POST">
             <label for="Username">Nom d'Utilisateur: </label>

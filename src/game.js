@@ -1,3 +1,5 @@
+
+
 const state = () => {
     $.ajax({
         url : "ajax-state.php", // Il faut créer cette page et son contrôleur appelle 
