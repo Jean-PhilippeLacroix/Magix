@@ -24,7 +24,9 @@
                         }
                         else{
                             CommonAction::keyAdd($result->key);
-                            $message = $result->key;
+                            $_SESSION["visibility"] = 1;
+                            header("location:lobby.php");
+                            exit;
                         }
                     }else{
                         $message = "pas de mot de Passe";

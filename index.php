@@ -6,20 +6,16 @@
 
     require_once("partial/header.php");
 ?>
+    <body id="login">
+        <form action="" method="POST">
+            <label for="Username">Nom d'Utilisateur: </label>
+            <input type="text" name="Username">
 
-    <?= $data["message"] ?>
+            <label for="Password">Mot de Passe: </label>
+            <input type="text" name="Password">
 
-    <form action="" method="POST">
-        <label for="Username">Nom d'Utilisateur: </label>
-        <input type="text" name="Username">
-
-        <label for="Password">Mot de Passe: </label>
-        <input type="text" name="Password">
-
-        <input type="submit" name="connexion" value="Connexion">      
-    </form>
-
-    <a href="disconnect.php">Deconnexion</a>
+            <input type="submit" name="connexion" value="Connexion">      
+        </form>
 
 <?php
     require_once("partial/footer.php");

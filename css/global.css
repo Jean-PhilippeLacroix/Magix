@@ -1,0 +1,14 @@
+
+body{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#login{
+    background-image: url("../images/login-bg.jpg");
+}
+
+#lobby{
+    background-image: url("../images/lobby-bg.jpg");
+}
