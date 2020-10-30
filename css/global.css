@@ -12,3 +12,11 @@ body{
 #lobby{
     background-image: url("../images/lobby-bg.jpg");
 }
+
+#gameField{
+    background-image: url("../images/game-bg.jpg");
+}
+
+iframe{
+    background-color: gray;
+}

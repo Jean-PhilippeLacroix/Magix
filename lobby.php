@@ -8,11 +8,31 @@
 ?>
     <body id="lobby">
 
-        <?= $data["message"] ?>
+        <div>
+            <form action="" method="POST">
+                <button type="submit" name="disconnect">Quitter</button>
+            </form>
+        </div>
 
-        <form action="" method="POST">
-            <button type="submit" name="disconnect">Quitter</button>
-        </form>
+        <div>
+            <form action="" method="POST">
+                <button type="submit" name="pratiquer">Pratiquer</button>
+            </form>
+        </div>
+
+        <div>
+            <form action="" method="POST">
+                <button type="submit" name="jouer">Jouer</button>
+            </form>
+        </div>
+
+        <div>
+            <iframe style="width:700px;height:240px;backgound" 
+                src="https://magix.apps-de-cours.com/server/#/chat/<?=$_SESSION["gameKey"]?>">
+            </iframe>
+        </div>
+
+        <?= $data["message"] ?>
 
 <?php
     require_once("partial/footer.php");
