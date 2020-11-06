@@ -4,7 +4,7 @@
     class ajaxStateAction extends CommonAction {
 
         public function __construct() {
-            parent::__construct(CommonAction::$VISIBILITY_);
+            parent::__construct(CommonAction::$VISIBILITY_MEMBER);
         }
 
         protected function executeAction() {
@@ -12,16 +12,8 @@
             $result = "";
             $data["key"] = $_SESSION['gameKey'];
 
-            $json = CommonAction::callAPI("game/state", $data);
-
-            if($json == "WAITING" || $json == "LAST_GAME_WON" || $json == "LAST_GAME_LOST"){
-                $result = $json;
-            }
-            else{
-                $result = json_decode($json);
-            }
-            
-            
+            $result = CommonAction::callAPI("games/state", $data);
+  
             return compact ("result");
         }
     }

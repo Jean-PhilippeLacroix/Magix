@@ -6,7 +6,7 @@
 
     require_once("partial/header.php");
 ?>
-        <script src="game.js"></script>
+        <script src="src/game.js"></script>
     </head>
     <body id="gameField">
 
@@ -14,7 +14,7 @@
             <button type=submit name="quitter">Quitter</button>
         </form>
 
-        <?= $data["message"] ?>
+        
 
 
 <?php
