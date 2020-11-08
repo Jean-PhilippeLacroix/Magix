@@ -1,7 +1,27 @@
 
 
-const buildBoard = (data)=>{
 
+const clearBoard = ()=>{
+    document.getElementById("advBoard").innerHTML = '';
+    document.getElementById("myBoard").innerHTML = '';
+    document.getElementById("myHand").innerHTML = '';
+}
+
+const buildBoard = (data)=>{ 
+
+    let hand = data.hand;
+    hand.forEach(element => {
+        console.log(element.hp);
+        let carte = document.createElement("div");
+        carte.className = "carte";
+        carte.appendChild(document.createTextNode(element.hp));
+        carte.appendChild(document.createTextNode(element.cost));
+        carte.appendChild(document.createTextNode(element.atk));
+        element.mechanics.forEach(mechanic =>{
+            carte.appendChild(document.createTextNode(mechanic));
+        });
+        document.getElementById("myHand").appendChild(carte);
+    });
 
 }
 
@@ -14,9 +34,12 @@ const state = () => {
     })
 .then(response => response.json())
 .then(data => {
-
+    
     console.log(data); // contient les cartes/état du jeu.
-    buildBoard(data);
+    if(data != "WAITING"){
+        clearBoard();
+        buildBoard(data);
+    }
     
     setTimeout(state, 1000); // Attendre 1 seconde avant de relancer l’appel
     })

@@ -23,3 +23,8 @@ div iframe{
     left: 33%;
     top: 71%;
 }
+
+.carte{
+    float: left;
+    border: 1px solid black;
+}

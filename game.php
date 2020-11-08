@@ -14,7 +14,14 @@
             <button type=submit name="quitter">Quitter</button>
         </form>
 
-        
+        <div id="advBoard">
+        </div>
+
+        <div id="myBoard">
+        </div>
+
+        <div id="myHand">
+        </div>
 
 
 <?php
