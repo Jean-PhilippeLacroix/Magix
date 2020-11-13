@@ -10,17 +10,25 @@
     </head>
     <body id="gameField">
 
-        <form action="" method="POST">
-            <button type=submit name="quitter">Quitter</button>
-        </form>
-
-        <div id="advBoard">
+        <div id="quitGameButton">
+            <form action="" method="POST">
+                <button type=submit name="quitter">Quitter</button>
+            </form>
         </div>
 
-        <div id="myBoard">
+        <div id="opponentStats" class="section">
         </div>
 
-        <div id="myHand">
+        <div id="advBoard" class="section">
+        </div>
+
+        <div id="myBoard" class="section">
+        </div>
+
+        <div id="myHand" class="section">
+        </div>
+
+        <div id="myStats" class="section">
         </div>
 
 

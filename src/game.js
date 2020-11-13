@@ -1,30 +1,78 @@
 
-
-
 const clearBoard = ()=>{
+    document.getElementById("opponentStats").innerHTML = '';
     document.getElementById("advBoard").innerHTML = '';
     document.getElementById("myBoard").innerHTML = '';
     document.getElementById("myHand").innerHTML = '';
+    document.getElementById("myStats").innerHTML = '';
+}
+
+const buildSection = (data, section)=>{
+    data.forEach(element => {
+        let carte = document.createElement("div");
+        carte.className = "carte";
+        carte.appendChild(document.createTextNode("Health: " + element.hp));
+        carte.appendChild(document.createElement("br"));
+
+        carte.appendChild(document.createTextNode("Cout: " + element.cost));
+        carte.appendChild(document.createElement("br"));
+
+        carte.appendChild(document.createTextNode("Atk: " + element.atk));
+        carte.appendChild(document.createElement("br"));
+
+        element.mechanics.forEach(mechanic =>{
+            carte.appendChild(document.createTextNode(mechanic + ", "));
+            carte.appendChild(document.createElement("br"));
+        });
+        document.getElementById(section).appendChild(carte);
+    });
+}
+
+
+const buildStats = (data, tag, section)=>{
+    let stat = document.createElement("div");
+    stat.className = "infoStats";
+
+    stat.appendChild(document.createTextNode(tag));
+    stat.appendChild(document.createElement("br"));
+    stat.appendChild(document.createTextNode(data));
+
+    document.getElementById(section).appendChild(stat);
+
+}
+
+const statsEnemi = (data)=>{
+    let section = "opponentStats"
+    buildStats(data.hp, "HP: ", section);
+    buildStats(data.mp, "MP: ", section);
+    buildStats(data.handSize, "Hand: ", section);
+    buildStats(data.username, "Adversaire: ", section);
+    buildStats(data.heroClass, "Class: ", section);
+    buildStats(data.remainingCardsCount, "Cartes: ", section);
+    
 }
 
 const buildBoard = (data)=>{ 
 
     let hand = data.hand;
-    hand.forEach(element => {
-        console.log(element.hp);
-        let carte = document.createElement("div");
-        carte.className = "carte";
-        carte.appendChild(document.createTextNode(element.hp));
-        carte.appendChild(document.createTextNode(element.cost));
-        carte.appendChild(document.createTextNode(element.atk));
-        element.mechanics.forEach(mechanic =>{
-            carte.appendChild(document.createTextNode(mechanic));
-        });
-        document.getElementById("myHand").appendChild(carte);
-    });
+    let myBoard = data.board;
+    let enemi = data.opponent;
+    let section = "myStats";
 
+    buildStats(data.hp, "HP: ", section);
+    buildStats(data.mp, "MP: ", section);
+    buildStats(data.maxMp, "Max MP: ", section);
+    buildStats(data.heroClass, "Class: ", section);
+    buildStats(data.remainingCardsCount, "Cartes: ", section);
+
+    buildSection(hand, "myHand");
+    buildSection(myBoard, "myBoard");
+
+    buildSection(enemi.board, "advBoard");
+    statsEnemi(enemi);
+
+    
 }
-
 
 
 const state = () => {
