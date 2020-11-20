@@ -1,3 +1,7 @@
+let gameData = null;
+let cardToPlay = null;
+let attackCard = null;
+
 
 const clearBoard = ()=>{
     document.getElementById("opponentStats").innerHTML = '';
@@ -11,6 +15,24 @@ const buildSection = (data, section)=>{
     data.forEach(element => {
         let carte = document.createElement("div");
         carte.className = "carte";
+        carte.id = element.uid;
+        
+        if(section == "myHand"){
+            carte.onclick = () =>  setSelected(element.uid, element.cost);
+        }
+        
+        if(section == "myBoard"){
+            carte.onclick = () => {attackCard = element.uid};
+        }
+
+        if(section == "advBoard"){
+            carte.onclick = () => attaquerCarte(element.uid);
+        }
+
+        else if(section == "myBoard"){
+            carte.onclick = () => setSelected(element.uid);
+        }
+
         carte.appendChild(document.createTextNode("Health: " + element.hp));
         carte.appendChild(document.createElement("br"));
 
@@ -20,12 +42,38 @@ const buildSection = (data, section)=>{
         carte.appendChild(document.createTextNode("Atk: " + element.atk));
         carte.appendChild(document.createElement("br"));
 
+        carte.appendChild(document.createTextNode("Uid: " + element.uid));
+        carte.appendChild(document.createElement("br"));
+
         element.mechanics.forEach(mechanic =>{
-            carte.appendChild(document.createTextNode(mechanic + ", "));
+            carte.appendChild(document.createTextNode(mechanic));
             carte.appendChild(document.createElement("br"));
         });
         document.getElementById(section).appendChild(carte);
     });
+}
+
+const setSelected = (uid, cost)=>{
+    if(gameData.mp <= cost){
+        cardToPlay = uid;
+    }
+    
+}
+
+const attaquerCarte = (uid)=>{
+    if(attackCard != null){
+        let formData = new FormData();
+            formData.append("action", "ATTACK");
+            formData.append("uid", attackCard);
+            formData.append("target", uid);
+
+            fetch("ajax-game.php", {
+                method : "POST",
+                credentials : "include",
+                body : formData
+            })
+            attackCard = null;
+    }
 }
 
 
@@ -54,6 +102,7 @@ const statsEnemi = (data)=>{
 
 const buildBoard = (data)=>{ 
 
+    gameData = data;
     let hand = data.hand;
     let myBoard = data.board;
     let enemi = data.opponent;
@@ -80,20 +129,64 @@ const state = () => {
         method : "POST",       // l’API (games/state)
         credentials: "include"
     })
-.then(response => response.json())
-.then(data => {
+    .then(response => response.json())
+    .then(data => {
     
-    console.log(data); // contient les cartes/état du jeu.
-    if(data != "WAITING"){
-        clearBoard();
-        buildBoard(data);
-    }
-    
-    setTimeout(state, 1000); // Attendre 1 seconde avant de relancer l’appel
+        console.log(data); // contient les cartes/état du jeu.
+        if(data != "WAITING"){
+            clearBoard();
+            buildBoard(data);
+        }
+        
+        setTimeout(state, 1000); // Attendre 1 seconde avant de relancer l’appel
     })
 }
 
+
 window.addEventListener("load", () => {
-setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
+    setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
+
+    document.getElementById("myBoard").onclick = () =>{
+        if(cardToPlay != null && gameData.yourTurn == true){
+            let formData = new FormData();
+            formData.append("action", "PLAY");
+            formData.append("uid", cardToPlay);
+
+            fetch("ajax-game.php", {
+                method : "POST",
+                credentials : "include",
+                body : formData
+            })
+            cardToPlay = null;
+        }
+    }
+
+    document.getElementById("hero").onclick = () =>{
+        if(gameData.yourTurn == true && gameData.heroPowerAlreadyUsed == false){
+            let formData = new FormData();
+            formData.append("action", "HERO_POWER");
+
+            fetch("ajax-game.php", {
+                method : "POST",
+                credentials : "include",
+                body : formData
+            })
+        }
+    }
+
+    document.getElementById("pass").onclick = () =>{
+        if(gameData.yourTurn == true){
+            let formData = new FormData();
+            formData.append("action", "END_TURN");
+
+            fetch("ajax-game.php", {
+                method : "POST",
+                credentials : "include",
+                body : formData
+            })
+        }
+    }
+
+    
 });
 

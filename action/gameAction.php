@@ -16,6 +16,7 @@
                 exit;
             }
 
+            
             elseif(isset($_POST["gameState"])){
                 $message = $_POST["gameState"];
             }

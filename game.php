@@ -10,12 +10,6 @@
     </head>
     <body id="gameField">
 
-        <div id="quitGameButton">
-            <form action="" method="POST">
-                <button type=submit name="quitter">Quitter</button>
-            </form>
-        </div>
-
         <div id="opponentStats" class="section">
         </div>
 
@@ -31,6 +25,20 @@
         <div id="myStats" class="section">
         </div>
 
+        <div id="gameDetails" class="section">
+            <div id="turnTimer">
+            </div>
+
+            <div id="pass">Passer le Tour</div>
+
+            <div id="hero">Hero Power</div>
+        </div>
+
+        <div id="quitGameButton">
+            <form action="" method="POST">
+                <button type=submit name="quitter">Quitter</button>
+            </form>
+        </div>
 
 <?php
     require_once("partial/footer.php");

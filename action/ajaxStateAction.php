@@ -8,7 +8,6 @@
         }
 
         protected function executeAction() {
-            $json = "";
             $result = "";
             $data["key"] = $_SESSION['gameKey'];
 
