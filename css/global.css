@@ -17,6 +17,12 @@ body{
     background-image: url("../images/game-bg.jpg");
 }
 
+#pass, #hero, #turnTimer, #yourTurn{
+    border: black solid 1px;
+    background-color: white;
+    font: large;
+}
+
 .section{
     display: flex;
     justify-content: space-around;

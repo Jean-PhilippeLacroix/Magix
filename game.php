@@ -29,6 +29,9 @@
             <div id="turnTimer">
             </div>
 
+            <div id="yourTurn">
+            </div>
+
             <div id="pass">Passer le Tour</div>
 
             <div id="hero">Hero Power</div>

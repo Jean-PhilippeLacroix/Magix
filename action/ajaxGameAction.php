@@ -1,7 +1,7 @@
 <?php
     require_once("action/CommonAction.php");
 
-    class Action extends CommonAction {
+    class ajaxGameAction extends CommonAction {
 
         public function __construct() {
             parent::__construct(CommonAction::$VISIBILITY_MEMBER);
@@ -21,7 +21,7 @@
 
                 elseif($_POST["action"] == "ATTACK"){
                     $data["uid"] = $_POST["uid"];
-                    $data["targetuid"] $_POST["target"];
+                    $data["targetuid"] = $_POST["target"];
                 }
 
                 $result = CommonAction::callAPI("games/action", $data);

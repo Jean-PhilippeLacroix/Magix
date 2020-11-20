@@ -9,6 +9,8 @@ const clearBoard = ()=>{
     document.getElementById("myBoard").innerHTML = '';
     document.getElementById("myHand").innerHTML = '';
     document.getElementById("myStats").innerHTML = '';
+    document.getElementById("turnTimer").innerHTML = '';
+    document.getElementById("yourTurn").innerHTML = '';
 }
 
 const buildSection = (data, section)=>{
@@ -72,6 +74,10 @@ const attaquerCarte = (uid)=>{
                 credentials : "include",
                 body : formData
             })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
             attackCard = null;
     }
 }
@@ -119,7 +125,8 @@ const buildBoard = (data)=>{
 
     buildSection(enemi.board, "advBoard");
     statsEnemi(enemi);
-
+    document.getElementById("turnTimer").appendChild(document.createTextNode("Time: " + data.remainingTurnTime));
+    document.getElementById("yourTurn").appendChild(document.createTextNode("Votre tour: " + data.yourTurn));
     
 }
 
@@ -157,6 +164,10 @@ window.addEventListener("load", () => {
                 credentials : "include",
                 body : formData
             })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
             cardToPlay = null;
         }
     }
@@ -171,6 +182,10 @@ window.addEventListener("load", () => {
                 credentials : "include",
                 body : formData
             })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
         }
     }
 
@@ -183,6 +198,10 @@ window.addEventListener("load", () => {
                 method : "POST",
                 credentials : "include",
                 body : formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
             })
         }
     }
