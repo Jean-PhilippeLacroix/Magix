@@ -17,7 +17,13 @@ body{
     background-image: url("../images/game-bg.jpg");
 }
 
-#pass, #hero, #turnTimer, #yourTurn{
+.actionSection{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1vh;
+}
+
+.action{
     border: black solid 1px;
     background-color: white;
     font: large;
@@ -27,6 +33,7 @@ body{
     display: flex;
     justify-content: space-around;
     margin-bottom: 1vh;
+    min-height: 110px;
 }
 
 .infoStats{
@@ -46,7 +53,7 @@ div iframe{
 }
 
 .carte{
-    background-color: gray;
+    background-color:gray;
     height: 160px;
     width: 100px;
     float: left;

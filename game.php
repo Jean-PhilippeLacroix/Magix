@@ -25,23 +25,32 @@
         <div id="myStats" class="section">
         </div>
 
-        <div id="gameDetails" class="section">
-            <div id="turnTimer">
-            </div>
+        <div id="gameActions" class="section">
 
-            <div id="yourTurn">
-            </div>
+            <div id="play" class="action">jouer Carte</div>
 
-            <div id="pass">Passer le Tour</div>
+            <div id="attack" class="action">Attaquer</div>
 
-            <div id="hero">Hero Power</div>
+            <div id="pass" class="action">Passer le Tour</div>
+
+            <div id="hero" class="action">Hero Power</div>
         </div>
 
-        <div id="quitGameButton">
-            <form action="" method="POST">
-                <button type=submit name="quitter">Quitter</button>
-            </form>
+        <div id="gameDetails" class="actionSection">
+            <div id="turnTimer" class="action">
+            </div>
+
+            <div id="yourTurn" class="action">
+            </div>
+
+            <div id="quitGameButton">
+                <form action="" method="POST">
+                    <button type=submit name="quitter">Quitter</button>
+                </form>
+            </div>
         </div>
+
+        
 
 <?php
     require_once("partial/footer.php");

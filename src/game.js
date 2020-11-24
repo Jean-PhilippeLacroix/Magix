@@ -20,19 +20,15 @@ const buildSection = (data, section)=>{
         carte.id = element.uid;
         
         if(section == "myHand"){
-            carte.onclick = () =>  setSelected(element.uid, element.cost);
+            carte.onclick = () =>  jouerCarte(element.uid, element.cost);
         }
         
         if(section == "myBoard"){
-            carte.onclick = () => {attackCard = element.uid};
+            carte.onclick = () => choisirCarteAttaque(element.uid);
         }
 
         if(section == "advBoard"){
             carte.onclick = () => attaquerCarte(element.uid);
-        }
-
-        else if(section == "myBoard"){
-            carte.onclick = () => setSelected(element.uid);
         }
 
         carte.appendChild(document.createTextNode("Health: " + element.hp));
@@ -55,11 +51,27 @@ const buildSection = (data, section)=>{
     });
 }
 
-const setSelected = (uid, cost)=>{
-    if(gameData.mp <= cost){
-        cardToPlay = uid;
-    }
-    
+const jouerCarte = (uid, cost)=>{
+    if(gameData.mp >= cost &&  gameData.yourTurn == true){
+        let formData = new FormData();
+        formData.append("action", "PLAY");
+        formData.append("uid", uid);
+
+        fetch("ajax-game.php", {
+            method : "POST",
+            credentials : "include",
+            body : formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            
+            console.log(data);
+        })
+    }  
+}
+
+const choisirCarteAttaque = (uid) =>{
+    attackCard = uid;
 }
 
 const attaquerCarte = (uid)=>{
@@ -153,25 +165,6 @@ const state = () => {
 window.addEventListener("load", () => {
     setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
 
-    document.getElementById("myBoard").onclick = () =>{
-        if(cardToPlay != null && gameData.yourTurn == true){
-            let formData = new FormData();
-            formData.append("action", "PLAY");
-            formData.append("uid", cardToPlay);
-
-            fetch("ajax-game.php", {
-                method : "POST",
-                credentials : "include",
-                body : formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            cardToPlay = null;
-        }
-    }
-
     document.getElementById("hero").onclick = () =>{
         if(gameData.yourTurn == true && gameData.heroPowerAlreadyUsed == false){
             let formData = new FormData();
@@ -205,7 +198,9 @@ window.addEventListener("load", () => {
             })
         }
     }
-
     
+    document.querySelector("#opponentStats").onclick = () =>{
+        attaquerCarte(0);
+    }
 });
 
