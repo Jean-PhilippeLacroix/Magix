@@ -45,6 +45,10 @@ body{
     border: 1px solid black;
 }
 
+#gameChat{
+    display: none;
+}
+
 
 div iframe{
     position: absolute;
@@ -52,8 +56,19 @@ div iframe{
     top: 71%;
 }
 
-.carte{
-    background-color:gray;
+.myCarte{
+    background-color:blue;
+    color: yellow;
+    height: 160px;
+    width: 100px;
+    float: left;
+    border: 1px solid black;
+}
+
+
+.advCarte{
+    background-color: slategray;
+    color: red;
     height: 160px;
     width: 100px;
     float: left;

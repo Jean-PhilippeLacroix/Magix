@@ -1,6 +1,7 @@
 let gameData = null;
 let cardToPlay = null;
 let attackCard = null;
+let chat = false;
 
 
 const clearBoard = ()=>{
@@ -16,19 +17,21 @@ const clearBoard = ()=>{
 const buildSection = (data, section)=>{
     data.forEach(element => {
         let carte = document.createElement("div");
-        carte.className = "carte";
         carte.id = element.uid;
         
         if(section == "myHand"){
             carte.onclick = () =>  jouerCarte(element.uid, element.cost);
+            carte.className = "myCarte";
         }
         
         if(section == "myBoard"){
             carte.onclick = () => choisirCarteAttaque(element.uid);
+            carte.className = "myCarte";
         }
 
         if(section == "advBoard"){
             carte.onclick = () => attaquerCarte(element.uid);
+            carte.className = "advCarte";
         }
 
         carte.appendChild(document.createTextNode("Health: " + element.hp));
@@ -44,11 +47,18 @@ const buildSection = (data, section)=>{
         carte.appendChild(document.createElement("br"));
 
         element.mechanics.forEach(mechanic =>{
+            if(mechanic == "taunt" && section != "myHand"){
+                setGlow(element.uid);
+            }
             carte.appendChild(document.createTextNode(mechanic));
             carte.appendChild(document.createElement("br"));
         });
         document.getElementById(section).appendChild(carte);
     });
+}
+
+const setGlow = (id) =>{
+    document.getElementById(id).style.boxShadow = "10px 10px 5px red";
 }
 
 const jouerCarte = (uid, cost)=>{
@@ -154,10 +164,47 @@ const state = () => {
         console.log(data); // contient les cartes/état du jeu.
         if(data != "WAITING"){
             clearBoard();
-            buildBoard(data);
+            if(data == "LAST_GAME_WON"){
+                afficherVictoire();
+            }
+            else if(data == "LAST_GAME_LOST"){
+                afficherDefaite();
+            }
+            else{
+                buildBoard(data);
+            }
         }
+
         
         setTimeout(state, 1000); // Attendre 1 seconde avant de relancer l’appel
+    })
+}
+
+
+const afficherVictoire = () =>{
+    
+    writeResult("victoire");
+}
+
+const afficherDefaite = () =>{
+    writeResult("defaite");
+}
+
+const writeResult = (result) => {
+    let formData = new FormData();
+    formData.append("classe", gameData.heroClass);
+    formData.append("adversaire", gameData.opponent.username);
+    formData.append("advClasse", gameData.opponent.heroClass);
+    formData.append("result", result);
+
+    fetch("ajax-game.php", {
+        method : "POST",
+        credentials : "include",
+        body : formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
     })
 }
 
@@ -201,6 +248,17 @@ window.addEventListener("load", () => {
     
     document.querySelector("#opponentStats").onclick = () =>{
         attaquerCarte(0);
+    }
+
+    document.getElementById("chatButton").onclick = () =>{
+        if(chat == false){
+            document.getElementById("gameChat").style.display = "block";
+            chat = true;
+        }
+        else{
+            document.getElementById("gameChat").style.display = "none";
+            chat = false;
+        }
     }
 });
 

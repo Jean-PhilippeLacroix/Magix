@@ -7,6 +7,7 @@
     require_once("partial/header.php");
 ?>
         <script src="src/game.js"></script>
+        <script src="src/chat.js"></script> 
     </head>
     <body id="gameField">
 
@@ -25,17 +26,6 @@
         <div id="myStats" class="section">
         </div>
 
-        <div id="gameActions" class="section">
-
-            <div id="play" class="action">jouer Carte</div>
-
-            <div id="attack" class="action">Attaquer</div>
-
-            <div id="pass" class="action">Passer le Tour</div>
-
-            <div id="hero" class="action">Hero Power</div>
-        </div>
-
         <div id="gameDetails" class="actionSection">
             <div id="turnTimer" class="action">
             </div>
@@ -43,11 +33,23 @@
             <div id="yourTurn" class="action">
             </div>
 
+            <div id="pass" class="action">Passer le Tour</div>
+
+            <div id="hero" class="action">Hero Power</div>
+
+            <div id="chatButton" class="action">Chat</div>
+
             <div id="quitGameButton">
                 <form action="" method="POST">
                     <button type=submit name="quitter">Quitter</button>
                 </form>
             </div>
+        </div>
+
+        <div id="gameChat">
+            <iframe style="width:700px;height:240px;backgound" onload="applyStyles(this)"
+                src="https://magix.apps-de-cours.com/server/#/chat/<?=$_SESSION["gameKey"]?>">
+            </iframe>
         </div>
 
         

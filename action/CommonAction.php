@@ -16,6 +16,10 @@
             $_SESSION['gameKey'] = $key;
         }
 
+        public function myName($name){
+            $_SESSION['myName'] = $name;
+        }
+
         public function execute() {
             if (!empty($_GET["logout"])) {
                 session_unset();

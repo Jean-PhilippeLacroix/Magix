@@ -24,6 +24,7 @@
                         }
                         else{
                             CommonAction::keyAdd($result->key);
+                            CommonAction::myName($_POST["Username"]);
                             $_SESSION["visibility"] = 1;
                             header("location:lobby.php");
                             exit;

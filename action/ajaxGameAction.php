@@ -26,6 +26,11 @@
 
                 $result = CommonAction::callAPI("games/action", $data);
             }
+
+            if(!empty($_POST["result"])){
+                resultDAO::setGameResult($_POST["classe"], $_POST["adversaire"], $_POST["advClasse"], $_POST["result"]);
+                $result = "database write";
+            }
             
             return compact ("result");
         }

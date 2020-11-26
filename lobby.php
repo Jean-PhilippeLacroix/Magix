@@ -10,6 +10,10 @@
     </head>
     <body id="lobby">
 
+        <div id="welcomeMessage">
+            Welcome to your new life underground, <?= $_SESSION["myName"] ?>!
+        </div>
+
         <div>
             <form action="" method="POST">
                 <button type="submit" name="disconnect">Quitter</button>
