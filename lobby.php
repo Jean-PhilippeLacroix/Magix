@@ -14,22 +14,24 @@
             Welcome to your new life underground, <?= $_SESSION["myName"] ?>!
         </div>
 
-        <div>
-            <form action="" method="POST">
-                <button type="submit" name="disconnect">Quitter</button>
-            </form>
-        </div>
+        <div id="boutonsDeLobby">
+            <div>
+                <form action="" method="POST">
+                    <button type="submit" name="disconnect" class="lobbyButton">Quitter</button>
+                </form>
+            </div>
 
-        <div>
-            <form action="" method="POST">
-                <button type="submit" name="pratiquer">Pratiquer</button>
-            </form>
-        </div>
+            <div>
+                <form action="" method="POST">
+                    <button type="submit" name="pratiquer" class="lobbyButton">Pratiquer</button>
+                </form>
+            </div>
 
-        <div>
-            <form action="" method="POST">
-                <button type="submit" name="jouer">Jouer</button>
-            </form>
+            <div>
+                <form action="" method="POST">
+                    <button type="submit" name="jouer" class="lobbyButton">Jouer</button>
+                </form>
+            </div>
         </div>
 
         <div>

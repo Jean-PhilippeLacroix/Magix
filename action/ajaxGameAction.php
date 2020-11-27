@@ -1,5 +1,6 @@
 <?php
     require_once("action/CommonAction.php");
+    require_once("action/DAO/resultDAO.php");
 
     class ajaxGameAction extends CommonAction {
 
@@ -27,7 +28,7 @@
                 $result = CommonAction::callAPI("games/action", $data);
             }
 
-            if(!empty($_POST["result"])){
+            if(!empty($_POST["write"])){
                 resultDAO::setGameResult($_POST["classe"], $_POST["adversaire"], $_POST["advClasse"], $_POST["result"]);
                 $result = "database write";
             }

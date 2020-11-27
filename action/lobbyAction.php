@@ -38,7 +38,7 @@
             elseif(isset($_POST["jouer"])){
                 $data["key"] = $_SESSION['gameKey'];
                 $data["type"] = "PVP";
-                //$result = CommonAction::callAPI("games/auto-match", $data);
+                $result = CommonAction::callAPI("games/auto-match", $data);
                 $message = $result;
 
                 if($result == "JOINED_PVP" || $result == "CREATED_PVP"){

@@ -47,8 +47,12 @@ const buildSection = (data, section)=>{
         carte.appendChild(document.createElement("br"));
 
         element.mechanics.forEach(mechanic =>{
-            if(mechanic == "taunt" && section != "myHand"){
-                setGlow(element.uid);
+            if(mechanic == "taunt"){
+                setTauntImage(element.uid);
+            }
+
+            if(mechanic == "charge" ){
+                setChargeImage(element.id);
             }
             carte.appendChild(document.createTextNode(mechanic));
             carte.appendChild(document.createElement("br"));
@@ -57,8 +61,8 @@ const buildSection = (data, section)=>{
     });
 }
 
-const setGlow = (id) =>{
-    document.getElementById(id).style.boxShadow = "10px 10px 5px red";
+const setTauntImage = (id) =>{
+    document.getElementById(id).style.backgroundImage = "url('../images/piper.jpg')";
 }
 
 const jouerCarte = (uid, cost)=>{
@@ -165,10 +169,10 @@ const state = () => {
         if(data != "WAITING"){
             clearBoard();
             if(data == "LAST_GAME_WON"){
-                afficherVictoire();
+                affichagePostGame("victoire");
             }
             else if(data == "LAST_GAME_LOST"){
-                afficherDefaite();
+                affichagePostGame("defaite");
             }
             else{
                 buildBoard(data);
@@ -181,13 +185,24 @@ const state = () => {
 }
 
 
-const afficherVictoire = () =>{
-    
-    writeResult("victoire");
-}
+const affichagePostGame = (message) =>{
 
-const afficherDefaite = () =>{
-    writeResult("defaite");
+    document.getElementById("playArea").innerHTML = '';
+
+    let endSplash = document.createElement("div");
+    endSplash.id = "endSplash";
+    if(message == "victoire"){
+        endSplash.className = "victoireMessage";
+    }
+    else{
+        endSplash.className = "defaiteMessage";
+    }
+
+    endSplash.appendChild(document.createTextNode(message + "!"));
+
+    console.log("fin de partie");
+    
+    writeResult(message);
 }
 
 const writeResult = (result) => {
@@ -195,7 +210,7 @@ const writeResult = (result) => {
     formData.append("classe", gameData.heroClass);
     formData.append("adversaire", gameData.opponent.username);
     formData.append("advClasse", gameData.opponent.heroClass);
-    formData.append("result", result);
+    formData.append("write", result);
 
     fetch("ajax-game.php", {
         method : "POST",

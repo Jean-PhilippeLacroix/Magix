@@ -49,6 +49,23 @@ body{
     display: none;
 }
 
+.victoireMessage{
+    background-color: blue;
+    color: yellow;
+    text-decoration: underline yellow;
+    font-size: xx-large;
+    float: center;
+    border: 1px solid yellow;
+}
+
+.defaiteMessage{
+    background-color: black;
+    color: red;
+    text-decoration: underline red;
+    font-size: xx-large;
+    float: center;
+    border: 1px solid red;
+}
 
 div iframe{
     position: absolute;
@@ -57,20 +74,42 @@ div iframe{
 }
 
 .myCarte{
-    background-color:blue;
-    color: yellow;
+    background-image: url("../images/hancock.jpg");
     height: 160px;
     width: 100px;
     float: left;
-    border: 1px solid black;
+    border: 1px solid green;
 }
-
 
 .advCarte{
-    background-color: slategray;
-    color: red;
+    background-image: url("../images//maxon.jpg");
     height: 160px;
     width: 100px;
     float: left;
-    border: 1px solid black;
+    border: 1px solid red;
 }
+
+#welcomeMessage{
+    color: white;
+    text-decoration: underline;
+    font-size: 60px;
+    margin-left: 40vh;
+    margin-top: 15vh;
+}
+
+#boutonsDeLobby{
+    display: flex;
+    margin-top: 15vh;
+    margin-left: 30vh;
+}
+
+.lobbyButton{
+    width: 250px;
+    height: 100px;
+    background-color: rgba(180, 180, 180, 0.2);
+    margin-left: 15vh;
+    font-size: xx-large;
+    color: white;
+    border: white double 3px;
+}
+

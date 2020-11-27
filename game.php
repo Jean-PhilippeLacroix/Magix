@@ -11,19 +11,21 @@
     </head>
     <body id="gameField">
 
-        <div id="opponentStats" class="section">
-        </div>
+        <div id="playArea">
+            <div id="opponentStats" class="section">
+            </div>
 
-        <div id="advBoard" class="section">
-        </div>
+            <div id="advBoard" class="section">
+            </div>
 
-        <div id="myBoard" class="section">
-        </div>
+            <div id="myBoard" class="section">
+            </div>
 
-        <div id="myHand" class="section">
-        </div>
+            <div id="myHand" class="section">
+            </div>
 
-        <div id="myStats" class="section">
+            <div id="myStats" class="section">
+            </div>
         </div>
 
         <div id="gameDetails" class="actionSection">
