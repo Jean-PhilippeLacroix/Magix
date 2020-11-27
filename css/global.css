@@ -49,22 +49,26 @@ body{
     display: none;
 }
 
-.victoireMessage{
-    background-color: blue;
-    color: yellow;
-    text-decoration: underline yellow;
-    font-size: xx-large;
-    float: center;
-    border: 1px solid yellow;
+.messageFin{
+    width: 40vh;
+    font-size: 80px;
+    text-align: center;
+    margin-top: 40vh;
+    margin-left: 80vh;
 }
 
-.defaiteMessage{
+#victoire{
+    background-color: blue;
+    color: yellow;
+    border: 1px solid yellow;
+    text-decoration: underline yellow;
+}
+
+#defaite{
+    border: 1px solid red;
     background-color: black;
     color: red;
     text-decoration: underline red;
-    font-size: xx-large;
-    float: center;
-    border: 1px solid red;
 }
 
 div iframe{
@@ -113,3 +117,29 @@ div iframe{
     border: white double 3px;
 }
 
+#errorBox{
+    font-size: large;
+    text-decoration: underline;
+    color: white;
+}
+
+
+.field{
+    width: 180px;
+    height: 40px;
+    background-color: rgba(180, 180, 180, 0.2);
+    font-size: x-large;
+    color: white;
+    border: white double 1px;
+    margin-top: 5vh;
+}
+
+
+::placeholder{
+    color: white;
+}
+
+body>form{
+    margin-left: 60vh;
+    margin-top: 20vh;
+}

@@ -34,7 +34,6 @@
                 }
                 
             }
-
             elseif(isset($_POST["jouer"])){
                 $data["key"] = $_SESSION['gameKey'];
                 $data["type"] = "PVP";

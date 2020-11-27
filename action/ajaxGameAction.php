@@ -29,7 +29,7 @@
             }
 
             if(!empty($_POST["write"])){
-                resultDAO::setGameResult($_POST["classe"], $_POST["adversaire"], $_POST["advClasse"], $_POST["result"]);
+                resultDAO::setGameResult($_POST["classe"], $_POST["adversaire"], $_POST["advClasse"], $_POST["write"]);
                 $result = "database write";
             }
             

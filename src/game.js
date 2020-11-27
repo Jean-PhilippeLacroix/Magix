@@ -1,7 +1,11 @@
-let gameData = null;
-let cardToPlay = null;
-let attackCard = null;
+let stateLoop;
+let gameData;
+let cardToPlay;
+let attackCard;
 let chat = false;
+let maClasse;
+let nomEenemi;
+let advClasse;
 
 
 const clearBoard = ()=>{
@@ -12,6 +16,7 @@ const clearBoard = ()=>{
     document.getElementById("myStats").innerHTML = '';
     document.getElementById("turnTimer").innerHTML = '';
     document.getElementById("yourTurn").innerHTML = '';
+    document.getElementById("errorBox").innerHTML = '';
 }
 
 const buildSection = (data, section)=>{
@@ -51,9 +56,6 @@ const buildSection = (data, section)=>{
                 setTauntImage(element.uid);
             }
 
-            if(mechanic == "charge" ){
-                setChargeImage(element.id);
-            }
             carte.appendChild(document.createTextNode(mechanic));
             carte.appendChild(document.createElement("br"));
         });
@@ -78,8 +80,9 @@ const jouerCarte = (uid, cost)=>{
         })
         .then(response => response.json())
         .then(data => {
-            
-            console.log(data);
+            if(typeof data != "object"){
+                document.getElementById("errorBox").innerHTML = data;
+            }
         })
     }  
 }
@@ -102,7 +105,9 @@ const attaquerCarte = (uid)=>{
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                if(typeof data != "object"){
+                    document.getElementById("errorBox").innerHTML = data;
+                }
             })
             attackCard = null;
     }
@@ -137,8 +142,12 @@ const buildBoard = (data)=>{
     gameData = data;
     let hand = data.hand;
     let myBoard = data.board;
-    let enemi = data.opponent;
+    enemi = data.opponent;
     let section = "myStats";
+
+    maClasse = data.heroClass;
+    advClasse = enemi.heroClass;
+    nomEenemi = enemi.username;
 
     buildStats(data.hp, "HP: ", section);
     buildStats(data.mp, "MP: ", section);
@@ -166,20 +175,19 @@ const state = () => {
     .then(data => {
     
         console.log(data); // contient les cartes/état du jeu.
-        if(data != "WAITING"){
+        if(typeof data == "object"){
             clearBoard();
+            buildBoard(data);
+        }
+        else{
             if(data == "LAST_GAME_WON"){
                 affichagePostGame("victoire");
             }
             else if(data == "LAST_GAME_LOST"){
                 affichagePostGame("defaite");
             }
-            else{
-                buildBoard(data);
-            }
         }
 
-        
         setTimeout(state, 1000); // Attendre 1 seconde avant de relancer l’appel
     })
 }
@@ -190,26 +198,28 @@ const affichagePostGame = (message) =>{
     document.getElementById("playArea").innerHTML = '';
 
     let endSplash = document.createElement("div");
-    endSplash.id = "endSplash";
+    endSplash.className = "messageFin";
     if(message == "victoire"){
-        endSplash.className = "victoireMessage";
+        endSplash.id = "victoire";
     }
     else{
-        endSplash.className = "defaiteMessage";
+        endSplash.id = "defaite";
     }
 
     endSplash.appendChild(document.createTextNode(message + "!"));
+    document.getElementById("playArea").appendChild(endSplash);
 
-    console.log("fin de partie");
+    clearTimeout(stateLoop);
     
     writeResult(message);
 }
 
+
 const writeResult = (result) => {
     let formData = new FormData();
-    formData.append("classe", gameData.heroClass);
-    formData.append("adversaire", gameData.opponent.username);
-    formData.append("advClasse", gameData.opponent.heroClass);
+    formData.append("classe", maClasse);
+    formData.append("adversaire", nomEenemi);
+    formData.append("advClasse", advClasse);
     formData.append("write", result);
 
     fetch("ajax-game.php", {
@@ -219,16 +229,18 @@ const writeResult = (result) => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        if(typeof data != "object"){
+            document.getElementById("errorBox").innerHTML = data;
+        }
     })
 }
 
 
 window.addEventListener("load", () => {
-    setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
+    stateLoop = setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
 
     document.getElementById("hero").onclick = () =>{
-        if(gameData.yourTurn == true && gameData.heroPowerAlreadyUsed == false){
+        if(gameData.yourTurn == true){ 
             let formData = new FormData();
             formData.append("action", "HERO_POWER");
 
@@ -239,7 +251,9 @@ window.addEventListener("load", () => {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                if(typeof data != "object"){
+                    document.getElementById("errorBox").innerHTML = data;
+                }
             })
         }
     }
@@ -256,7 +270,9 @@ window.addEventListener("load", () => {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                if(typeof data != "object"){
+                    document.getElementById("errorBox").innerHTML = data;
+                }
             })
         }
     }

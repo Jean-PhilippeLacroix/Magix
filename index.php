@@ -9,13 +9,15 @@
     </head>
     <body id="login">
         <form action="" method="POST">
-            <label for="Username">Nom d'Utilisateur: </label>
-            <input type="text" name="Username">
+            <div>
+                <input type="text" name="Username" class = "field" placeholder = "Username">
+            </div>
 
-            <label for="Password">Mot de Passe: </label>
-            <input type="text" name="Password">
+            <div>
+                <input type="password" name="Password" class = "field" placeholder = "Password">
+            </div>
 
-            <input type="submit" name="connexion" value="Connexion">      
+            <input type="submit" name="connexion" value="Connexion" class = "field">      
         </form>
 
 <?php

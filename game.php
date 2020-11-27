@@ -54,6 +54,9 @@
             </iframe>
         </div>
 
+        <div id="errorBox">
+        </div>
+
         
 
 <?php
